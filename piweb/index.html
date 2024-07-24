@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Current and Voltage Display</title>
+    <style>
+        /* Optional: Some basic styling for the display */
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            height: 120%;
+        }
+        
+        .heading {
+            color: antiquewhite;
+            font-size: 50px;
+        }
+        .reading-container1, .reading-container2, .reading-container3 {
+            
+            padding: 10px;
+            margin-bottom: 10px;
+          
+            width: 30%;
+            height: 300px;
+            text-align: center;
+        }
+      
+        
+        .heading {
+            color: antiquewhite;
+            font-size: 40px;
+        }
+        .reading-container1 p, .reading-container2 p, .reading-container3 p {
+            color: rgb(23, 21, 19);
+            font-size: 20px;
+        }
+        .board {
+            background-color: darkred;
+            border-radius: 25px;
+            padding: 10px;
+            margin-bottom: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+            height: fit-content;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            width: 72%
+        }
+        .all {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+           
+        }
+        .currentnumber1 {
+            color: red;
+        }
+        .currentnumber2 {
+            color: red;
+        }
+        .currentnumber3 {
+            color: red;
+        }
+        .currentnumber4 {
+            color: red;
+        }
+        .currentnumber5 {
+            color: red;
+        }
+        .currentnumber6 {
+            color: red;
+        }
+        .currentnumber7 {
+            color: red;
+        }
+        .currentnumber8 {
+            color: red;
+        }
+        .currentnumber9 {
+            color: red;
+        }
+        
+        .graphs {
+            width: 98%;
+            margin-top: 20px;
+            height: 300px;
+            background-color: antiquewhite;
+            border-radius: 25px;
+            /* padding: 10px; */
+            margin-bottom: 10px;
+
+
+        }
+        .panelly{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            
+            width: 95%;
+            height: 30%;
+            background-color: rgb(53, 46, 53);
+            border-radius: 25px;
+            padding: 10px;
+            margin-bottom: 10px;
+
+        }
+        .gaugebar{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            width: 95%;
+          
+            
+        }
+/* 
+        .panelly2{
+            display: flex;
+            flex-direction: row;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            width: 95%;
+            height: 30%;
+            background-color: rgb(54, 71, 71);
+            border-radius: 25px;
+            padding: 10px;
+            margin-bottom: 10px;
+
+        }
+        .panelly3{
+            display: flex;
+            flex-direction: row;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            width: 95%;
+            height: 30%;
+            background-color: #57513e;
+            border-radius: 25px;
+            padding: 10px;
+            margin-bottom: 10px;
+        } */
+        
+.tablink {
+  background-color: #555;
+  color: white;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  font-size: 17px;
+  width: 25%;
+}
+
+.tablink:hover {
+  background-color: #777;
+}
+
+/* Style the tab content */
+
+
+        body {
+            /* background-color: #b34646; */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+        @media (max-width: 800px) {
+            .board {
+                flex-direction: column;
+                height: fit-content;
+                width:95%;
+            }
+            .reading-container1, .reading-container2, .reading-container3 {
+                width: 80%;
+                height: 20%;
+            }
+            .panelly1, .panelly2, .panelly3{
+                
+                display: flex;
+            flex-direction: column;
+            justify-content:space-evenly;
+            }
+            .graphs{
+                width: 98%;
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- <div class="all"> -->
+    <h2 class="heading">Solar Panel Demonstration Unit:</h2>
+
+    <div class="board">
+        <div>
+        <button class="tablink" onclick="openCity('battery', this, 'red')" id="defaultOpen">London</button>
+        <button class="tablink" onclick="openCity('panel', this, 'green')">Paris</button>
+        <button class="tablink" onclick="openCity('load', this, 'blue')">Tokyo</button>
+    </div>
+
+        <div id ="battery" class="panelly">
+            <h2 class="heading">Battery Data:</h2>
+            <!-- <div class="reading-container1">
+                    
+                    <p id="bcurrent">Loading...</p>
+                    <p id="bvoltage">Loading...</p>
+                    <p id="btemp">Loading...</p>
+                
+            </div> -->
+
+
+            <div class = "gaugebar">
+                <div>
+                                
+                <canvas id="battery-temperature-gauge" data-type="radial-gauge"
+                data-width="400"
+                data-height="400"
+                data-units="°C"
+                data-title="Temperature"
+                data-min-value="0"
+                data-max-value="100"
+                data-major-ticks="[0,10,20,30,40,50,60,70,80,90,100]"
+                data-minor-ticks="2"
+                data-stroke-ticks="true"
+                data-highlights="[
+                    {&quot;from&quot;: -50, &quot;to&quot;: 0, &quot;color&quot;: &quot;rgba(0,0, 255, .3)&quot;},
+                    {&quot;from&quot;: 0, &quot;to&quot;: 50, &quot;color&quot;: &quot;rgba(255, 0, 0, .3)&quot;}
+                ]"
+                data-ticks-angle="225"
+                data-start-angle="67.5"
+                data-color-major-ticks="#ddd"
+                data-color-minor-ticks="#ddd"
+                data-color-title="#eee"
+                data-color-units="#ccc"
+                data-color-numbers="#eee"
+                data-color-plate="#222"
+                data-border-shadow-width="0"
+                data-borders="true"
+                data-needle-type="arrow"
+                data-needle-width="2"
+                data-needle-circle-size="7"
+                data-needle-circle-outer="true"
+                data-needle-circle-inner="false"
+                data-animation-duration="1500"
+                data-animation-rule="linear"
+                data-color-border-outer="#333"
+                data-color-border-outer-end="#111"
+                data-color-border-middle="#222"
+                data-color-border-middle-end="#111"
+                data-color-border-inner="#111"
+                data-color-border-inner-end="#333"
+                data-color-needle-shadow-down="#333"
+                data-color-needle-circle-outer="#333"
+                data-color-needle-circle-outer-end="#111"
+                data-color-needle-circle-inner="#111"
+                data-color-needle-circle-inner-end="#222"
+                data-value-box-border-radius="0"
+                data-color-value-box-rect="#222"
+                data-color-value-box-rect-end="#333"
+                data-font-value="Led"
+                width="400"
+                height="400"
+                style="width: 400px; height: 400px;">
+                </canvas>
+
+                </div>
+                <div>
+                                
+                <canvas id="battery-current-gauge" data-type="radial-gauge"
+                data-width="400"
+                data-height="400"
+                data-units="°A"
+                data-title="Current"
+                data-min-value="0"
+                data-max-value="100"
+                data-major-ticks="[0,10,20,30,40,50,60,70,80,90,100]"
+                data-minor-ticks="2"
+                data-stroke-ticks="true"
+                data-highlights="[
+                    {&quot;from&quot;: -50, &quot;to&quot;: 0, &quot;color&quot;: &quot;rgba(0,0, 255, .3)&quot;},
+                    {&quot;from&quot;: 0, &quot;to&quot;: 50, &quot;color&quot;: &quot;rgba(255, 0, 0, .3)&quot;}
+                ]"
+                data-ticks-angle="225"
+                data-start-angle="67.5"
+                data-color-major-ticks="#ddd"
+                data-color-minor-ticks="#ddd"
+                data-color-title="#eee"
+                data-color-units="#ccc"
+                data-color-numbers="#eee"
+                data-color-plate="#222"
+                data-border-shadow-width="0"
+                data-borders="true"
+                data-needle-type="arrow"
+                data-needle-width="2"
+                data-needle-circle-size="7"
+                data-needle-circle-outer="true"
+                data-needle-circle-inner="false"
+                data-animation-duration="1500"
+                data-animation-rule="linear"
+                data-color-border-outer="#333"
+                data-color-border-outer-end="#111"
+                data-color-border-middle="#222"
+                data-color-border-middle-end="#111"
+                data-color-border-inner="#111"
+                data-color-border-inner-end="#333"
+                data-color-needle-shadow-down="#333"
+                data-color-needle-circle-outer="#333"
+                data-color-needle-circle-outer-end="#111"
+                data-color-needle-circle-inner="#111"
+                data-color-needle-circle-inner-end="#222"
+                data-value-box-border-radius="0"
+                data-color-value-box-rect="#222"
+                data-color-value-box-rect-end="#333"
+                data-font-value="Led"
+                width="400"
+                height="400"
+                style="width: 400px; height: 400px;">
+                </canvas>
+
+                </div>
+                <div>
+                                
+                <canvas id="battery-voltage-gauge" data-type="radial-gauge"
+                data-width="400"
+                data-height="400"
+                data-units="V"
+                data-title="Voltage"
+                data-min-value="0"
+                data-max-value="100"
+                data-major-ticks="[0,10,20,30,40,50,60,70,80,90,100]"
+                data-minor-ticks="2"
+                data-stroke-ticks="true"
+                data-highlights="[
+                    {&quot;from&quot;: -50, &quot;to&quot;: 0, &quot;color&quot;: &quot;rgba(0,0, 255, .3)&quot;},
+                    {&quot;from&quot;: 0, &quot;to&quot;: 50, &quot;color&quot;: &quot;rgba(255, 0, 0, .3)&quot;}
+                ]"
+                data-ticks-angle="225"
+                data-start-angle="67.5"
+                data-color-major-ticks="#ddd"
+                data-color-minor-ticks="#ddd"
+                data-color-title="#eee"
+                data-color-units="#ccc"
+                data-color-numbers="#eee"
+                data-color-plate="#222"
+                data-border-shadow-width="0"
+                data-borders="true"
+                data-needle-type="arrow"
+                data-needle-width="2"
+                data-needle-circle-size="7"
+                data-needle-circle-outer="true"
+                data-needle-circle-inner="false"
+                data-animation-duration="1500"
+                data-animation-rule="linear"
+                data-color-border-outer="#333"
+                data-color-border-outer-end="#111"
+                data-color-border-middle="#222"
+                data-color-border-middle-end="#111"
+                data-color-border-inner="#111"
+                data-color-border-inner-end="#333"
+                data-color-needle-shadow-down="#333"
+                data-color-needle-circle-outer="#333"
+                data-color-needle-circle-outer-end="#111"
+                data-color-needle-circle-inner="#111"
+                data-color-needle-circle-inner-end="#222"
+                data-value-box-border-radius="0"
+                data-color-value-box-rect="#222"
+                data-color-value-box-rect-end="#333"
+                data-font-value="Led"
+                width="400"
+                height="400"
+                style="width: 400px; height: 400px;">
+                </canvas>
+
+                </div>
+        </div>
+        <div class="graphs">
+            <canvas id="batteryCurrentChart"></canvas>
+            
+        </div>
+        </div>
+
+    <div id ="panel" class="panelly">
+        <div class="reading-container2">
+            <h2 class="heading">Solar Panel Data:</h2>
+            <p id="plight">Loading...</p>
+            <p id="pcurrent">Loading...</p>
+            <p id="pvoltage">Loading...</p>
+            <p id="ptemp">Loading...</p>
+            
+        </div>
+        <div class="graphs"><canvas id="panelCurrentChart"></canvas></div>
+    </div>
+
+    <div id = "load" class="panelly">
+        <div class="reading-container3">
+            <h2 class="heading">Load Data:</h2>
+            <p id="lcurrent">Loading...</p>
+            <p id="lvoltage">Loading...</p>
+            <p id="ltemp">Loading...</p>
+            <button id="toggleLedButton">Toggle LED</button>
+            <p id="ledStatus">LED Status: Unknown</p>
+        </div>
+    </div>
+    </div>
+    
+    
+<!-- </div> -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+
+<script>
+    async function fetchData() {
+        try {const response = await fetch('http://pv-demo.local:8000/stuff', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            });
+            if (!response.ok) {
+                throw new Error('Failed to fetch data');
+            }
+            const data = await response.json();
+            console.log(data); // Log the data to verify its structure
+            // document.getElementById('bcurrent').innerHTML = `Battery Current: <span class="currentnumber1">${data.Battery_Current || 'N/A'} </span>A`;
+            // document.getElementById('bvoltage').innerHTML = `Battery Voltage: <span class="currentnumber2">${data.Battery_Voltage || 'N/A'} </span>V`;
+            // document.getElementById('btemp').innerHTML = `Battery Temperature: <span class="currentnumber3">${data.Battery_Temperature || 'N/A'} </span>C`;
+            // document.getElementById('plight').innerHTML = `Sunlight: <span class="currentnumber4">${data.Sunlight || 'N/A'} </span>lx`;
+            // document.getElementById('pcurrent').innerHTML = `Panel Current: <span class="currentnumber5">${data.Panel_Current || 'N/A'} </span>A`;
+            // document.getElementById('pvoltage').innerHTML = `Panel Voltage: <span class="currentnumber6">${data.Panel_Voltage || 'N/A'} </span>V`;
+            // document.getElementById('ptemp').innerHTML = `Panel Temperature: <span class="currentnumber7">${data.Panel_Temperature || 'N/A'} </span>C`;
+
+            const panelTemp = parseFloat(data.Panel_Temperature) || 0;
+            let gradientColor;
+            if (panelTemp <= 10) {
+                gradientColor = `linear-gradient(to bottom right, blue, green)`;
+            } else if (panelTemp <= 20) {
+                gradientColor = `linear-gradient(to bottom right, green, purple)`;
+            } else if (panelTemp <= 30) {
+                gradientColor = `linear-gradient(to bottom right, purple, orange)`;
+            } else {
+                gradientColor = `linear-gradient(to bottom right, orange, red)`;
+            }
+            document.querySelector('body').style.backgroundImage = gradientColor;
+
+            // const currentNumber1Elements = document.querySelectorAll('.currentnumber1');
+            // currentNumber1Elements.forEach(element => {
+            //     const currentValue = parseFloat(element.textContent.trim()) || 0;
+            //     if (currentValue > 10) {
+            //         element.style.color = 'red';
+            //     } else if (currentValue > 7) {
+            //         element.style.color = 'orange';
+            //     } else {
+            //         element.style.color = 'blue';
+            //     }
+            // });
+            // const currentNumber2Elements = document.querySelectorAll('.currentnumber2');
+            // currentNumber2Elements.forEach(element => {
+            //     const currentValue = parseFloat(element.textContent.trim()) || 0;
+            //     if (currentValue > 13) {
+            //         element.style.color = 'red';
+            //     } else if (currentValue > 12) {
+            //         element.style.color = 'orange';
+            //     } else {
+            //         element.style.color = 'blue';
+            //     }
+            // });
+            // const currentNumber3Elements = document.querySelectorAll('.currentnumber3');
+            // currentNumber3Elements.forEach(element => {
+            //     const currentValue = parseFloat(element.textContent.trim()) || 0;
+            //     if (currentValue > 30) {
+            //         element.style.color = 'red';
+            //     } else if (currentValue > 20) {
+            //         element.style.color = 'orange';
+            //     } else {
+            //         element.style.color = 'blue';
+            //     }
+            // });
+            // const currentNumber4Elements = document.querySelectorAll('.currentnumber4');
+            // currentNumber4Elements.forEach(element => {
+            //     const currentValue = parseFloat(element.textContent.trim()) || 0;
+            //     if (currentValue > 30) {
+            //         element.style.color = 'red';
+            //     } else if (currentValue > 20) {
+            //         element.style.color = 'orange';
+            //     } else {
+            //         element.style.color = 'blue';
+            //     }
+            // });
+            // const currentNumber5Elements = document.querySelectorAll('.currentnumber5');
+            // currentNumber5Elements.forEach(element => {
+            //     const currentValue = parseFloat(element.textContent.trim()) || 0;
+            //     if (currentValue > 30) {
+            //         element.style.color = 'red';
+            //     } else if (currentValue > 20) {
+            //         element.style.color = 'orange';
+            //     } else {
+            //         element.style.color = 'blue';
+            //     }
+            // });
+            // const currentNumber6Elements = document.querySelectorAll('.currentnumber6');
+            // currentNumber6Elements.forEach(element => {
+            //     const currentValue = parseFloat(element.textContent.trim()) || 0;
+            //     if (currentValue > 30) {
+            //         element.style.color = 'red';
+            //     } else if (currentValue > 20) {
+            //         element.style.color = 'orange';
+            //     } else {
+            //         element.style.color = 'blue';
+            //     }
+            // });
+            // const currentNumber7Elements = document.querySelectorAll('.currentnumber7');
+            // currentNumber7Elements.forEach(element => {
+            //     const currentValue = parseFloat(element.textContent.trim()) || 0;
+            //     if (currentValue > 30) {
+            //         element.style.color = 'red';
+            //     } else if (currentValue > 20) {
+            //         element.style.color = 'orange';
+            //     } else {
+            //         element.style.color = 'blue';
+            //     }
+            // });
+            // const currentNumber8Elements = document.querySelectorAll('.currentnumber8');
+            // currentNumber8Elements.forEach(element => {
+            //     const currentValue = parseFloat(element.textContent.trim()) || 0;
+            //     if (currentValue > 30) {
+            //         element.style.color = 'red';
+            //     } else if (currentValue > 20) {
+            //         element.style.color = 'orange';
+            //     } else {
+            //         element.style.color = 'blue';
+            //     }
+            // });
+            // const currentNumber9Elements = document.querySelectorAll('.currentnumber9');
+            // currentNumber9Elements.forEach(element => {
+            //     const currentValue = parseFloat(element.textContent.trim()) || 0;
+            //     if (currentValue > 30) {
+            //         element.style.color = 'red';
+            //     } else if (currentValue > 20) {
+            //         element.style.color = 'orange';
+            //     } else {
+            //         element.style.color = 'blue';
+            //     }
+            // });
+
+            // Fetch the LED status
+            const ledResponse = await fetch('http://pv-demo.local:8000/led-status', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            });
+            if (!ledResponse.ok) {
+                throw new Error('Failed to fetch LED status');
+            }
+            const ledData = await ledResponse.json();
+            document.getElementById('ledStatus').innerHTML = `LED Status: ${ledData.status ? 'ON' : 'OFF'}`;
+
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
+
+    async function fetchHistoricalData() {
+        try {
+            const response = await fetch('http://pv-demo.local:8000/history', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            });
+            if (!response.ok) {
+                throw new Error('Failed to fetch historical data');
+            }
+            const data = await response.json();
+            console.log(data); // Log the data to verify its structure
+            plotBatteryCurrentChart(data);
+            plotPanelCurrentChart(data);
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
+
+    function plotBatteryCurrentChart(data) {
+    const ctx = document.getElementById('batteryCurrentChart').getContext('2d');
+
+    // Extract timestamps, currents, voltages, and temperatures from data
+    const timestamps = data.map(entry => new Date(entry.timestamp));
+    const currents = data.map(entry => entry.Battery_Current);
+    const voltages = data.map(entry => entry.Battery_Voltage);
+    const temperatures = data.map(entry => entry.Battery_Temperature);
+
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: timestamps,
+            datasets: [
+                {
+                    label: 'Battery Current (A)',
+                    data: currents,
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',  // Transparent fill color
+                    borderWidth: 1,
+                    fill: false
+                },
+                {
+                    label: 'Battery Voltage (V)',
+                    data: voltages,
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderWidth: 1,
+                    fill: false
+                },
+                {
+                    label: 'Battery Temperature (C)',
+                    data: temperatures,
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderWidth: 1,
+                    fill: false
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                x: {
+                    type: 'time',
+                    time: {
+                        unit: 'minute',
+                        tooltipFormat: 'll HH:mm'
+                    },
+                    title: {
+                        display: true,
+                        text: 'Time'
+                    }
+                },
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Value'
+                    }
+                }
+            }
+        }
+    });
+}
+function plotPanelCurrentChart(data) {
+    const ctx = document.getElementById('panelCurrentChart').getContext('2d');
+
+    // Extract timestamps, currents, voltages, and temperatures from data
+    const timestamps = data.map(entry => new Date(entry.timestamp));
+    const currents = data.map(entry => entry.Panel_Current);
+    const voltages = data.map(entry => entry.Panel_Voltage);
+    const temperatures = data.map(entry => entry.Panel_Temperature);
+
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: timestamps,
+            datasets: [
+                {
+                    label: 'Panel Current (A)',
+                    data: currents,
+                    borderColor: 'rgba(163, 60, 174, 1)',
+                    backgroundColor: 'rgba(163, 60, 174, 0.2)',  // Transparent fill color
+                    borderWidth: 1,
+                    fill: false
+                },
+                {
+                    label: 'Panel Voltage (V)',
+                    data: voltages,
+                    borderColor: 'rgba(76, 66, 74, 1)',
+                    backgroundColor: 'rgba(76, 66, 74, 0.2)',
+                    borderWidth: 1,
+                    fill: false
+                },
+                {
+                    label: 'Panel Temperature (C)',
+                    data: temperatures,
+                    borderColor: 'rgba(156, 250, 74, 1)',
+                    backgroundColor: 'rgba(156, 250, 74, 0.2)',
+                    borderWidth: 1,
+                    fill: false
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                x: {
+                    type: 'time',
+                    time: {
+                        unit: 'minute',
+                        tooltipFormat: 'll HH:mm'
+                    },
+                    title: {
+                        display: true,
+                        text: 'Time'
+                    }
+                },
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Value'
+                    }
+                }
+            }
+        }
+    });
+}
+    document.getElementById('toggleLedButton').addEventListener('click', async () => {
+        try {
+            const response = await fetch('http://pv-demo.local:8000/toggle-led', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            });
+            if (!response.ok) {
+                throw new Error('Failed to toggle LED');
+            }
+            const data = await response.json();
+            document.getElementById('ledStatus').innerHTML = `LED Status: ${data.status ? 'On' : 'Off'}`;
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    });
+
+    async function fetchLedStatus() {
+        try {
+            const response = await fetch('http://pv-demo.local:8000/led-status', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            });
+            if (!response.ok) {
+                throw new Error('Failed to fetch LED status');
+            }
+            const data = await response.json();
+            document.getElementById('ledStatus').innerHTML = `LED Status: ${data.status ? 'On' : 'Off'}`;
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
+
+    setInterval(fetchData, 500);
+    fetchHistoricalData();
+    fetchLedStatus();
+</script>
+<script src="gauge.min.js"></script>
+
+<script>
+    var gauge1 = new RadialGauge({
+        renderTo: 'battery-temperature-gauge',
+        width: 400,
+        height: 400,
+        units: "°C",
+        title: "Temperature",
+        minValue: 0,
+        maxValue: 100,
+        majorTicks: [0,10,20,30,40,50,60,70,80,90,100],
+        minorTicks: 2,
+        strokeTicks: true,
+        highlights: [
+            { from: 0, to: 10, color: "rgba(0, 0, 236, .3)" },
+            { from: 10, to: 20, color: "rgba(2, 166, 238, .3)" },
+            { from: 20, to: 30, color: "rgba(0, 237, 237, .3)" },
+            { from: 30, to: 40, color: "rgba(2, 238, 163, .3)" },
+            { from: 40, to: 50, color: "rgba(0, 237, 0, .3)" },
+            { from: 50, to: 60, color: "rgba(168, 236, 1, .3)" },
+            { from: 60, to: 70, color: "rgba(238, 236, 1, .3)" },
+            { from: 70, to: 80, color: "rgba(232, 167, 1, .3)" },
+            { from: 80, to: 100, color: "rgba(234, 6, 5, .3)" },
+        ],
+        ticksAngle: 225,
+        startAngle: 67.5,
+        colorMajorTicks: "#ddd",
+        colorMinorTicks: "#ddd",
+        colorTitle: "#eee",
+        colorUnits: "#ccc",
+        colorNumbers: "#eee",
+        colorPlate: "#222",
+        borderShadowWidth: 0,
+        borders: true,
+        needleType: "arrow",
+        needleWidth: 2,
+        needleCircleSize: 7,
+        needleCircleOuter: true,
+        needleCircleInner: false,
+        animationDuration: 1500,
+        animationRule: "linear",
+        colorBorderOuter: "#333",
+        colorBorderOuterEnd: "#111",
+        colorBorderMiddle: "#222",
+        colorBorderMiddleEnd: "#111",
+        colorBorderInner: "#111",
+        colorBorderInnerEnd: "#333",
+        colorNeedleShadowDown: "#333",
+        colorNeedleCircleOuter: "#333",
+        colorNeedleCircleOuterEnd: "#111",
+        colorNeedleCircleInner: "#111",
+        colorNeedleCircleInnerEnd: "#222",
+        valueBoxBorderRadius: 0,
+        colorValueBoxRect: "#222",
+        colorValueBoxRectEnd: "#333",
+        fontValue: "Led"
+    }).draw();
+    
+    var gauge2 = new RadialGauge({
+        renderTo: 'battery-current-gauge',
+        width: 400,
+        height: 400,
+        units: "A",
+        title: "Current",
+        minValue: 0,
+        maxValue: 100,
+        majorTicks: [0,10,20,30,40,50,60,70,80,90,100],
+        minorTicks: 2,
+        strokeTicks: true,
+        highlights: [
+            { from: 0, to: 10, color: "rgba(0, 0, 236, .3)" },
+            { from: 10, to: 20, color: "rgba(2, 166, 238, .3)" },
+            { from: 20, to: 30, color: "rgba(0, 237, 237, .3)" },
+            { from: 30, to: 40, color: "rgba(2, 238, 163, .3)" },
+            { from: 40, to: 50, color: "rgba(0, 237, 0, .3)" },
+            { from: 50, to: 60, color: "rgba(168, 236, 1, .3)" },
+            { from: 60, to: 70, color: "rgba(238, 236, 1, .3)" },
+            { from: 70, to: 80, color: "rgba(232, 167, 1, .3)" },
+            { from: 80, to: 100, color: "rgba(234, 6, 5, .3)" },
+        ],
+        ticksAngle: 225,
+        startAngle: 67.5,
+        colorMajorTicks: "#ddd",
+        colorMinorTicks: "#ddd",
+        colorTitle: "#eee",
+        colorUnits: "#ccc",
+        colorNumbers: "#eee",
+        colorPlate: "#222",
+        borderShadowWidth: 0,
+        borders: true,
+        needleType: "arrow",
+        needleWidth: 2,
+        needleCircleSize: 7,
+        needleCircleOuter: true,
+        needleCircleInner: false,
+        animationDuration: 1500,
+        animationRule: "linear",
+        colorBorderOuter: "#333",
+        colorBorderOuterEnd: "#111",
+        colorBorderMiddle: "#222",
+        colorBorderMiddleEnd: "#111",
+        colorBorderInner: "#111",
+        colorBorderInnerEnd: "#333",
+        colorNeedleShadowDown: "#333",
+        colorNeedleCircleOuter: "#333",
+        colorNeedleCircleOuterEnd: "#111",
+        colorNeedleCircleInner: "#111",
+        colorNeedleCircleInnerEnd: "#222",
+        valueBoxBorderRadius: 0,
+        colorValueBoxRect: "#222",
+        colorValueBoxRectEnd: "#333",
+        fontValue: "Led"
+    }).draw();
+
+    var gauge3 = new RadialGauge({
+        renderTo: 'battery-voltage-gauge',
+        width: 400,
+        height: 400,
+        units: "V",
+        title: "Voltage",
+        minValue: 0,
+        maxValue: 100,
+        majorTicks: [0,10,20,30,40,50,60,70,80,90,100],
+        minorTicks: 2,
+        strokeTicks: true,
+        highlights: [
+            { from: 0, to: 10, color: "rgba(0, 0, 236, .3)" },
+            { from: 10, to: 20, color: "rgba(2, 166, 238, .3)" },
+            { from: 20, to: 30, color: "rgba(0, 237, 237, .3)" },
+            { from: 30, to: 40, color: "rgba(2, 238, 163, .3)" },
+            { from: 40, to: 50, color: "rgba(0, 237, 0, .3)" },
+            { from: 50, to: 60, color: "rgba(168, 236, 1, .3)" },
+            { from: 60, to: 70, color: "rgba(238, 236, 1, .3)" },
+            { from: 70, to: 80, color: "rgba(232, 167, 1, .3)" },
+            { from: 80, to: 100, color: "rgba(234, 6, 5, .3)" },
+        ],
+        ticksAngle: 225,
+        startAngle: 67.5,
+        colorMajorTicks: "#ddd",
+        colorMinorTicks: "#ddd",
+        colorTitle: "#eee",
+        colorUnits: "#ccc",
+        colorNumbers: "#eee",
+        colorPlate: "#222",
+        borderShadowWidth: 0,
+        borders: true,
+        needleType: "arrow",
+        needleWidth: 2,
+        needleCircleSize: 7,
+        needleCircleOuter: true,
+        needleCircleInner: false,
+        animationDuration: 1500,
+        animationRule: "linear",
+        colorBorderOuter: "#333",
+        colorBorderOuterEnd: "#111",
+        colorBorderMiddle: "#222",
+        colorBorderMiddleEnd: "#111",
+        colorBorderInner: "#111",
+        colorBorderInnerEnd: "#333",
+        colorNeedleShadowDown: "#333",
+        colorNeedleCircleOuter: "#333",
+        colorNeedleCircleOuterEnd: "#111",
+        colorNeedleCircleInner: "#111",
+        colorNeedleCircleInnerEnd: "#222",
+        valueBoxBorderRadius: 0,
+        colorValueBoxRect: "#222",
+        colorValueBoxRectEnd: "#333",
+        fontValue: "Led"
+    }).draw();
+    
+    // Function to continuously increase and decrease the value
+  async function animateGauge() {
+        try {const response = await fetch('http://pv-demo.local:8000/stuff', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+        if (!response.ok) {
+            throw new Error('Failed to fetch data');
+        }
+        const data = await response.json();
+        
+        let value1 = data.Battery_Temperature, value2 = data.Battery_Current,value3 = data.Battery_Voltage;
+     
+            
+        gauge1.value=value1;
+        gauge2.value=value2;
+        gauge3.value=value3;
+
+             
+        
+
+    } catch (error) {
+        console.error('Error:', error);
+    }
+        
+    }
+
+    animateGauge();
+</script>
+
+<script>
+    function openCity(cityName,elmnt,color) {
+      var i, tabcontent, tablinks;
+      tabcontent = document.getElementsByClassName("panelly");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+      tablinks = document.getElementsByClassName("tablink");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].style.backgroundColor = "";
+      }
+      document.getElementById(cityName).style.display = "block";
+      elmnt.style.backgroundColor = color;
+    
+    }
+    // Get the element with id="defaultOpen" and click on it
+    document.getElementById("defaultOpen").click();
+    </script>
+</body>
+</html>
