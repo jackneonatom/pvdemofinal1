@@ -9,6 +9,12 @@
         body {
             font-family: Arial, sans-serif;
             padding: 20px;
+            
+       
+        /* height: 100vh; Ensure body takes full viewport height */
+        
+        background-repeat: no-repeat; /* Ensure it doesn't repeat */
+        background-size: cover; /* Cover the entire body */
             height: 120%;
         }
         
@@ -46,7 +52,7 @@
             align-items: center;
             height: fit-content;
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-            width: 72%
+            width: 78%
         }
         .all {
             display: flex;
@@ -98,7 +104,7 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            align-items: center;
+            align-content: center;
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
             
             width: 95%;
@@ -109,13 +115,40 @@
             margin-bottom: 10px;
 
         }
+        .panelly {
+            display: flex; /* Make it a flex container */
+            justify-content: center; /* Center items horizontally */
+            align-items: center; /* Center items vertically */
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            
+            width: 95%;
+            height: 30%;
+            background-color: rgb(53, 46, 53);
+            border-radius: 25px;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        
         .gaugebar{
             display: flex;
             flex-direction: row;
             justify-content: space-evenly;
             width: 95%;
+            
           
             
+        }
+        .tabs{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+        .bdn{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
         }
 /* 
         .panelly2{
@@ -143,7 +176,10 @@
         } */
         
 .tablink {
-  background-color: #555;
+    background-color: #777;
+  border-radius: 20px 5px 0px 0px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+   /* #555; */
   color: white;
   float: left;
   border: none;
@@ -151,7 +187,7 @@
   cursor: pointer;
   padding: 14px 16px;
   font-size: 17px;
-  width: 25%;
+  width: 35%;
 }
 
 .tablink:hover {
@@ -168,6 +204,7 @@
             justify-content: space-evenly;
             align-items: center;
         }
+       
         @media (max-width: 800px) {
             .board {
                 flex-direction: column;
@@ -194,15 +231,16 @@
 <!-- <div class="all"> -->
     <h2 class="heading">Solar Panel Demonstration Unit:</h2>
 
-    <div class="board">
-        <div>
-        <button class="tablink" onclick="openCity('battery', this, 'red')" id="defaultOpen">London</button>
-        <button class="tablink" onclick="openCity('panel', this, 'green')">Paris</button>
-        <button class="tablink" onclick="openCity('load', this, 'blue')">Tokyo</button>
-    </div>
+<div class="board">
+            <div class="tabs">
+            <button class="tablink" onclick="openCity('battery', this, 'rgb(53, 46, 53)')" id="defaultOpen">Battery</button>
+            <button class="tablink" onclick="openCity('panel', this, 'rgb(53, 46, 53)')">Panel</button>
+            <button class="tablink" onclick="openCity('load', this, 'rgb(53, 46, 53)')">Load</button>
+            </div>
 
-        <div id ="battery" class="panelly">
-            <h2 class="heading">Battery Data:</h2>
+    <div id ="battery" class="panelly">
+        <div class="bdn">
+        <h2 class="heading">Battery Data:</h2>
             <!-- <div class="reading-container1">
                     
                     <p id="bcurrent">Loading...</p>
@@ -212,197 +250,200 @@
             </div> -->
 
 
-            <div class = "gaugebar">
-                <div>
-                                
-                <canvas id="battery-temperature-gauge" data-type="radial-gauge"
-                data-width="400"
-                data-height="400"
-                data-units="°C"
-                data-title="Temperature"
-                data-min-value="0"
-                data-max-value="100"
-                data-major-ticks="[0,10,20,30,40,50,60,70,80,90,100]"
-                data-minor-ticks="2"
-                data-stroke-ticks="true"
-                data-highlights="[
-                    {&quot;from&quot;: -50, &quot;to&quot;: 0, &quot;color&quot;: &quot;rgba(0,0, 255, .3)&quot;},
-                    {&quot;from&quot;: 0, &quot;to&quot;: 50, &quot;color&quot;: &quot;rgba(255, 0, 0, .3)&quot;}
-                ]"
-                data-ticks-angle="225"
-                data-start-angle="67.5"
-                data-color-major-ticks="#ddd"
-                data-color-minor-ticks="#ddd"
-                data-color-title="#eee"
-                data-color-units="#ccc"
-                data-color-numbers="#eee"
-                data-color-plate="#222"
-                data-border-shadow-width="0"
-                data-borders="true"
-                data-needle-type="arrow"
-                data-needle-width="2"
-                data-needle-circle-size="7"
-                data-needle-circle-outer="true"
-                data-needle-circle-inner="false"
-                data-animation-duration="1500"
-                data-animation-rule="linear"
-                data-color-border-outer="#333"
-                data-color-border-outer-end="#111"
-                data-color-border-middle="#222"
-                data-color-border-middle-end="#111"
-                data-color-border-inner="#111"
-                data-color-border-inner-end="#333"
-                data-color-needle-shadow-down="#333"
-                data-color-needle-circle-outer="#333"
-                data-color-needle-circle-outer-end="#111"
-                data-color-needle-circle-inner="#111"
-                data-color-needle-circle-inner-end="#222"
-                data-value-box-border-radius="0"
-                data-color-value-box-rect="#222"
-                data-color-value-box-rect-end="#333"
-                data-font-value="Led"
-                width="400"
-                height="400"
-                style="width: 400px; height: 400px;">
-                </canvas>
+                                    <div class = "gaugebar">
+                                    <div>
+                                                    
+                                    <canvas id="battery-temperature-gauge" data-type="radial-gauge"
+                                    data-width="400"
+                                    data-height="400"
+                                    data-units="°C"
+                                    data-title="Temperature"
+                                    data-min-value="0"
+                                    data-max-value="100"
+                                    data-major-ticks="[0,10,20,30,40,50,60,70,80,90,100]"
+                                    data-minor-ticks="2"
+                                    data-stroke-ticks="true"
+                                    data-highlights="[
+                                        {&quot;from&quot;: -50, &quot;to&quot;: 0, &quot;color&quot;: &quot;rgba(0,0, 255, .3)&quot;},
+                                        {&quot;from&quot;: 0, &quot;to&quot;: 50, &quot;color&quot;: &quot;rgba(255, 0, 0, .3)&quot;}
+                                    ]"
+                                    data-ticks-angle="225"
+                                    data-start-angle="67.5"
+                                    data-color-major-ticks="#ddd"
+                                    data-color-minor-ticks="#ddd"
+                                    data-color-title="#eee"
+                                    data-color-units="#ccc"
+                                    data-color-numbers="#eee"
+                                    data-color-plate="#222"
+                                    data-border-shadow-width="0"
+                                    data-borders="true"
+                                    data-needle-type="arrow"
+                                    data-needle-width="2"
+                                    data-needle-circle-size="7"
+                                    data-needle-circle-outer="true"
+                                    data-needle-circle-inner="false"
+                                    data-animation-duration="1500"
+                                    data-animation-rule="linear"
+                                    data-color-border-outer="#333"
+                                    data-color-border-outer-end="#111"
+                                    data-color-border-middle="#222"
+                                    data-color-border-middle-end="#111"
+                                    data-color-border-inner="#111"
+                                    data-color-border-inner-end="#333"
+                                    data-color-needle-shadow-down="#333"
+                                    data-color-needle-circle-outer="#333"
+                                    data-color-needle-circle-outer-end="#111"
+                                    data-color-needle-circle-inner="#111"
+                                    data-color-needle-circle-inner-end="#222"
+                                    data-value-box-border-radius="0"
+                                    data-color-value-box-rect="#222"
+                                    data-color-value-box-rect-end="#333"
+                                    data-font-value="Led"
+                                    width="400"
+                                    height="400"
+                                    style="width: 400px; height: 400px;">
+                                    </canvas>
 
-                </div>
-                <div>
-                                
-                <canvas id="battery-current-gauge" data-type="radial-gauge"
-                data-width="400"
-                data-height="400"
-                data-units="°A"
-                data-title="Current"
-                data-min-value="0"
-                data-max-value="100"
-                data-major-ticks="[0,10,20,30,40,50,60,70,80,90,100]"
-                data-minor-ticks="2"
-                data-stroke-ticks="true"
-                data-highlights="[
-                    {&quot;from&quot;: -50, &quot;to&quot;: 0, &quot;color&quot;: &quot;rgba(0,0, 255, .3)&quot;},
-                    {&quot;from&quot;: 0, &quot;to&quot;: 50, &quot;color&quot;: &quot;rgba(255, 0, 0, .3)&quot;}
-                ]"
-                data-ticks-angle="225"
-                data-start-angle="67.5"
-                data-color-major-ticks="#ddd"
-                data-color-minor-ticks="#ddd"
-                data-color-title="#eee"
-                data-color-units="#ccc"
-                data-color-numbers="#eee"
-                data-color-plate="#222"
-                data-border-shadow-width="0"
-                data-borders="true"
-                data-needle-type="arrow"
-                data-needle-width="2"
-                data-needle-circle-size="7"
-                data-needle-circle-outer="true"
-                data-needle-circle-inner="false"
-                data-animation-duration="1500"
-                data-animation-rule="linear"
-                data-color-border-outer="#333"
-                data-color-border-outer-end="#111"
-                data-color-border-middle="#222"
-                data-color-border-middle-end="#111"
-                data-color-border-inner="#111"
-                data-color-border-inner-end="#333"
-                data-color-needle-shadow-down="#333"
-                data-color-needle-circle-outer="#333"
-                data-color-needle-circle-outer-end="#111"
-                data-color-needle-circle-inner="#111"
-                data-color-needle-circle-inner-end="#222"
-                data-value-box-border-radius="0"
-                data-color-value-box-rect="#222"
-                data-color-value-box-rect-end="#333"
-                data-font-value="Led"
-                width="400"
-                height="400"
-                style="width: 400px; height: 400px;">
-                </canvas>
+                                    </div>
+                                    <div>
+                                                    
+                                    <canvas id="battery-current-gauge" data-type="radial-gauge"
+                                    data-width="400"
+                                    data-height="400"
+                                    data-units="°A"
+                                    data-title="Current"
+                                    data-min-value="0"
+                                    data-max-value="100"
+                                    data-major-ticks="[0,10,20,30,40,50,60,70,80,90,100]"
+                                    data-minor-ticks="2"
+                                    data-stroke-ticks="true"
+                                    data-highlights="[
+                                        {&quot;from&quot;: -50, &quot;to&quot;: 0, &quot;color&quot;: &quot;rgba(0,0, 255, .3)&quot;},
+                                        {&quot;from&quot;: 0, &quot;to&quot;: 50, &quot;color&quot;: &quot;rgba(255, 0, 0, .3)&quot;}
+                                    ]"
+                                    data-ticks-angle="225"
+                                    data-start-angle="67.5"
+                                    data-color-major-ticks="#ddd"
+                                    data-color-minor-ticks="#ddd"
+                                    data-color-title="#eee"
+                                    data-color-units="#ccc"
+                                    data-color-numbers="#eee"
+                                    data-color-plate="#222"
+                                    data-border-shadow-width="0"
+                                    data-borders="true"
+                                    data-needle-type="arrow"
+                                    data-needle-width="2"
+                                    data-needle-circle-size="7"
+                                    data-needle-circle-outer="true"
+                                    data-needle-circle-inner="false"
+                                    data-animation-duration="1500"
+                                    data-animation-rule="linear"
+                                    data-color-border-outer="#333"
+                                    data-color-border-outer-end="#111"
+                                    data-color-border-middle="#222"
+                                    data-color-border-middle-end="#111"
+                                    data-color-border-inner="#111"
+                                    data-color-border-inner-end="#333"
+                                    data-color-needle-shadow-down="#333"
+                                    data-color-needle-circle-outer="#333"
+                                    data-color-needle-circle-outer-end="#111"
+                                    data-color-needle-circle-inner="#111"
+                                    data-color-needle-circle-inner-end="#222"
+                                    data-value-box-border-radius="0"
+                                    data-color-value-box-rect="#222"
+                                    data-color-value-box-rect-end="#333"
+                                    data-font-value="Led"
+                                    width="400"
+                                    height="400"
+                                    style="width: 400px; height: 400px;">
+                                    </canvas>
 
-                </div>
-                <div>
-                                
-                <canvas id="battery-voltage-gauge" data-type="radial-gauge"
-                data-width="400"
-                data-height="400"
-                data-units="V"
-                data-title="Voltage"
-                data-min-value="0"
-                data-max-value="100"
-                data-major-ticks="[0,10,20,30,40,50,60,70,80,90,100]"
-                data-minor-ticks="2"
-                data-stroke-ticks="true"
-                data-highlights="[
-                    {&quot;from&quot;: -50, &quot;to&quot;: 0, &quot;color&quot;: &quot;rgba(0,0, 255, .3)&quot;},
-                    {&quot;from&quot;: 0, &quot;to&quot;: 50, &quot;color&quot;: &quot;rgba(255, 0, 0, .3)&quot;}
-                ]"
-                data-ticks-angle="225"
-                data-start-angle="67.5"
-                data-color-major-ticks="#ddd"
-                data-color-minor-ticks="#ddd"
-                data-color-title="#eee"
-                data-color-units="#ccc"
-                data-color-numbers="#eee"
-                data-color-plate="#222"
-                data-border-shadow-width="0"
-                data-borders="true"
-                data-needle-type="arrow"
-                data-needle-width="2"
-                data-needle-circle-size="7"
-                data-needle-circle-outer="true"
-                data-needle-circle-inner="false"
-                data-animation-duration="1500"
-                data-animation-rule="linear"
-                data-color-border-outer="#333"
-                data-color-border-outer-end="#111"
-                data-color-border-middle="#222"
-                data-color-border-middle-end="#111"
-                data-color-border-inner="#111"
-                data-color-border-inner-end="#333"
-                data-color-needle-shadow-down="#333"
-                data-color-needle-circle-outer="#333"
-                data-color-needle-circle-outer-end="#111"
-                data-color-needle-circle-inner="#111"
-                data-color-needle-circle-inner-end="#222"
-                data-value-box-border-radius="0"
-                data-color-value-box-rect="#222"
-                data-color-value-box-rect-end="#333"
-                data-font-value="Led"
-                width="400"
-                height="400"
-                style="width: 400px; height: 400px;">
-                </canvas>
+                                    </div>
+                                    <div>
+                                                    
+                                    <canvas id="battery-voltage-gauge" data-type="radial-gauge"
+                                    data-width="400"
+                                    data-height="400"
+                                    data-units="V"
+                                    data-title="Voltage"
+                                    data-min-value="0"
+                                    data-max-value="100"
+                                    data-major-ticks="[0,10,20,30,40,50,60,70,80,90,100]"
+                                    data-minor-ticks="2"
+                                    data-stroke-ticks="true"
+                                    data-highlights="[
+                                        {&quot;from&quot;: -50, &quot;to&quot;: 0, &quot;color&quot;: &quot;rgba(0,0, 255, .3)&quot;},
+                                        {&quot;from&quot;: 0, &quot;to&quot;: 50, &quot;color&quot;: &quot;rgba(255, 0, 0, .3)&quot;}
+                                    ]"
+                                    data-ticks-angle="225"
+                                    data-start-angle="67.5"
+                                    data-color-major-ticks="#ddd"
+                                    data-color-minor-ticks="#ddd"
+                                    data-color-title="#eee"
+                                    data-color-units="#ccc"
+                                    data-color-numbers="#eee"
+                                    data-color-plate="#222"
+                                    data-border-shadow-width="0"
+                                    data-borders="true"
+                                    data-needle-type="arrow"
+                                    data-needle-width="2"
+                                    data-needle-circle-size="7"
+                                    data-needle-circle-outer="true"
+                                    data-needle-circle-inner="false"
+                                    data-animation-duration="1500"
+                                    data-animation-rule="linear"
+                                    data-color-border-outer="#333"
+                                    data-color-border-outer-end="#111"
+                                    data-color-border-middle="#222"
+                                    data-color-border-middle-end="#111"
+                                    data-color-border-inner="#111"
+                                    data-color-border-inner-end="#333"
+                                    data-color-needle-shadow-down="#333"
+                                    data-color-needle-circle-outer="#333"
+                                    data-color-needle-circle-outer-end="#111"
+                                    data-color-needle-circle-inner="#111"
+                                    data-color-needle-circle-inner-end="#222"
+                                    data-value-box-border-radius="0"
+                                    data-color-value-box-rect="#222"
+                                    data-color-value-box-rect-end="#333"
+                                    data-font-value="Led"
+                                    width="400"
+                                    height="400"
+                                    style="width: 400px; height: 400px;">
+                                    </canvas>
 
-                </div>
-        </div>
-        <div class="graphs">
-            <canvas id="batteryCurrentChart"></canvas>
-            
-        </div>
+                                    </div>
+                                    </div>
+
+                                                                       
+                                <div class="graphs">
+                                <canvas id="batteryCurrentChart"></canvas>
+                                
+                                </div>
+                            </div>
         </div>
 
     <div id ="panel" class="panelly">
-        <div class="reading-container2">
-            <h2 class="heading">Solar Panel Data:</h2>
-            <p id="plight">Loading...</p>
-            <p id="pcurrent">Loading...</p>
-            <p id="pvoltage">Loading...</p>
-            <p id="ptemp">Loading...</p>
-            
-        </div>
-        <div class="graphs"><canvas id="panelCurrentChart"></canvas></div>
+                <div class="reading-container2">
+                    <h2 class="heading">Solar Panel Data:</h2>
+                    <p id="plight">Loading...</p>
+                    <p id="pcurrent">Loading...</p>
+                    <p id="pvoltage">Loading...</p>
+                    <p id="ptemp">Loading...</p>
+                    
+                </div>
+                <div class="graphs"><canvas id="panelCurrentChart"></canvas></div>
     </div>
 
     <div id = "load" class="panelly">
-        <div class="reading-container3">
-            <h2 class="heading">Load Data:</h2>
-            <p id="lcurrent">Loading...</p>
-            <p id="lvoltage">Loading...</p>
-            <p id="ltemp">Loading...</p>
-            <button id="toggleLedButton">Toggle LED</button>
-            <p id="ledStatus">LED Status: Unknown</p>
-        </div>
+                <div class="reading-container3">
+                    <h2 class="heading">Load Data:</h2>
+                    <p id="lcurrent">Loading...</p>
+                    <p id="lvoltage">Loading...</p>
+                    <p id="ltemp">Loading...</p>
+                    <button id="toggleLedButton">Toggle LED</button>
+                    <p id="ledStatus">LED Status: Unknown</p>
+                </div>
     </div>
     </div>
     
