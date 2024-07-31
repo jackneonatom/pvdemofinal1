@@ -6,17 +6,24 @@
     <title>Current and Voltage Display</title>
     <style>
         /* Optional: Some basic styling for the display */
-        body {
-            font-family: Arial, sans-serif;
-            padding: 20px;
-            
-       
-        /* height: 100vh; Ensure body takes full viewport height */
-        
-        background-repeat: no-repeat; /* Ensure it doesn't repeat */
-        background-size: cover; /* Cover the entire body */
-            height: 120%;
-        }
+    
+        html, body {
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+/* Flex container properties for body */
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: lightblue; /* Example background color */
+    background-repeat: no-repeat; /* Ensure it doesn't repeat */
+    background-size: cover; /* Cover the entire body */
+}
         
         .heading {
             color: antiquewhite;
@@ -61,32 +68,10 @@
             align-items: center;
            
         }
-        .currentnumber1 {
-            color: red;
-        }
-        .currentnumber2 {
-            color: red;
-        }
-        .currentnumber3 {
-            color: red;
-        }
-        .currentnumber4 {
-            color: red;
-        }
-        .currentnumber5 {
-            color: red;
-        }
-        .currentnumber6 {
-            color: red;
-        }
-        .currentnumber7 {
-            color: red;
-        }
-        .currentnumber8 {
-            color: red;
-        }
+        .currentnumber1, .currentnumber2, .currentnumber3, .currentnumber4,
+        .currentnumber5, .currentnumber6, .currentnumber7, .currentnumber8,
         .currentnumber9 {
-            color: red;
+        color: red;
         }
         
         .graphs {
@@ -229,7 +214,7 @@
 </head>
 <body>
 <!-- <div class="all"> -->
-    <h2 class="heading">Solar Panel Demonstration Unit:</h2>
+    <!-- <h2 class="heading">Solar Panel Demonstration Unit:</h2> -->
 
 <div class="board">
             <div class="tabs">
