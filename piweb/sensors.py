@@ -29,6 +29,14 @@ def read_panel_temp():
 def read_panel_light():
     return 7
 
+def read_load_current():
+    return 69
+
+def read_load_voltage():
+    return 37
+
+
+
 async def get_led_status():
     async with aiohttp.ClientSession() as session:
         async with session.get('http://pv-demo.local:8000/led-status') as response:
@@ -46,11 +54,13 @@ async def main():
     panel_voltage_reading = read_panel_voltage()
     panel_temp_reading = read_panel_temp()
     panel_light_reading = read_panel_light()
+    load_current_reading = read_load_current()
+    load_voltage_reading = read_load_voltage()
 
     led_status = await get_led_status()
     GPIO.output(LED_PIN, GPIO.HIGH if led_status else GPIO.LOW)
 
-    task = asyncio.create_task(store_data(battery_current_reading, battery_voltage_reading, battery_temp_reading, panel_current_reading, panel_voltage_reading, panel_temp_reading, panel_light_reading))
+    task = asyncio.create_task(store_data(battery_current_reading, battery_voltage_reading, battery_temp_reading, panel_current_reading, panel_voltage_reading, panel_temp_reading, panel_light_reading,load_current_reading,load_voltage_reading))
     print("Data stored (or task created for storing data).")
 
 asyncio.run(main())

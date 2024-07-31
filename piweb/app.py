@@ -21,9 +21,9 @@ async def get_latest_from_db():
     try:
         latest_reading = await db["readings"].find_one(sort=[("_id", -1)])
         if latest_reading:
-            return {"Battery_Current": latest_reading["Battery_Current"], "Battery_Voltage": latest_reading["Battery_Voltage"], "Battery_Temperature": latest_reading["Battery_Temperature"], "Panel_Current": latest_reading["Panel_Current"], "Panel_Voltage": latest_reading["Panel_Voltage"], "Panel_Temperature": latest_reading["Panel_Temperature"], "Sunlight": latest_reading["Sunlight"]}
+            return {"Battery_Current": latest_reading["Battery_Current"], "Battery_Voltage": latest_reading["Battery_Voltage"], "Battery_Temperature": latest_reading["Battery_Temperature"], "Panel_Current": latest_reading["Panel_Current"], "Panel_Voltage": latest_reading["Panel_Voltage"], "Panel_Temperature": latest_reading["Panel_Temperature"], "Sunlight": latest_reading["Sunlight"],"Load_Current": latest_reading["Load_Current"], "Load_Voltage": latest_reading["Load_Voltage"]}
         else:
-            return {"Battery_Current": None, "Battery_Voltage": None, "Battery_Temperature": None, "Panel_Current": None, "Panel_Voltage": None, "Panel_Temperature": None, "Sunlight": None}
+            return {"Battery_Current": None, "Battery_Voltage": None, "Battery_Temperature": None, "Panel_Current": None, "Panel_Voltage": None, "Panel_Temperature": None, "Sunlight": None,"Load_Current": None, "Load_Voltage": None}
     except Exception as e:
         raise HTTPException(status_code=500, detail="Failed to fetch data from database")
 
@@ -40,7 +40,9 @@ async def get_historical_data():
                 "Panel_Current": reading["Panel_Current"],
                 "Panel_Voltage": reading["Panel_Voltage"],
                 "Panel_Temperature": reading["Panel_Temperature"],
-                "Sunlight": reading["Sunlight"]
+                "Sunlight": reading["Sunlight"],
+                "Load_Current": reading["Load_Current"],
+                "Load_Voltage": reading["Load_Voltage"]
             }
             for reading in readings
         ]
@@ -66,7 +68,7 @@ async def get_led_status():
     except Exception as e:
         raise HTTPException(status_code=500, detail="Failed to fetch LED status")
 
-async def store_data(bcurrent: float, bvoltage: float, btemp: float, pcurrent: float, pvoltage: float, ptemp: float, plight: float):
+async def store_data(bcurrent: float, bvoltage: float, btemp: float, pcurrent: float, pvoltage: float, ptemp: float, plight: float,lcurrent: float, lvoltage: float):
     thing_state = {
         "Battery_Current": bcurrent,
         "Battery_Voltage": bvoltage,
@@ -75,6 +77,8 @@ async def store_data(bcurrent: float, bvoltage: float, btemp: float, pcurrent: f
         "Panel_Voltage": pvoltage,
         "Panel_Temperature": ptemp,
         "Sunlight": plight,
+        "Load_Current": lcurrent,
+        "Load_Voltage": lvoltage,
     }
 
     result = await db["readings"].insert_one(thing_state)

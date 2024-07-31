@@ -85,21 +85,7 @@ body {
 
 
         }
-        .panelly{
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-content: center;
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-            
-            width: 95%;
-            height: 30%;
-            background-color: rgb(53, 46, 53);
-            border-radius: 25px;
-            padding: 10px;
-            margin-bottom: 10px;
-
-        }
+        
         .panelly {
             display: flex; /* Make it a flex container */
             justify-content: center; /* Center items horizontally */
@@ -191,12 +177,19 @@ body {
         }
        
         @media (max-width: 800px) {
-            .board {
+            /* .board {
                 flex-direction: column;
                 height: fit-content;
                 width:95%;
-            }
-            .reading-container1, .reading-container2, .reading-container3 {
+            } */
+            .gaugebar{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            width: 95%;
+                
+                    }
+            /* .reading-container1, .reading-container2, .reading-container3 {
                 width: 80%;
                 height: 20%;
             }
@@ -208,7 +201,23 @@ body {
             }
             .graphs{
                 width: 98%;
+            } */
+        }
+        @media (max-width: 1700px) {
+            .board {
+                width:95%;
             }
+          
+            
+        }
+        @media (max-width: 430px) {
+            .board {
+                width:110%;
+                justify-content: center; /* Center items horizontally */
+                
+            }
+          
+            
         }
     </style>
 </head>
